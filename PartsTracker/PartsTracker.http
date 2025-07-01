@@ -1,0 +1,6 @@
+@PartsTracker_HostAddress = http://localhost:5006
+
+GET {{PartsTracker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
