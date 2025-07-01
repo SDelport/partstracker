@@ -1,0 +1,23 @@
+<div class="container mt-4" *ngIf="!loading && part; else loadingOrError">
+  <h2>Part Details: {{ part.partNumber }}</h2>
+  <dl class="row">
+    <dt class="col-sm-3">Description</dt>
+    <dd class="col-sm-9">{{ part.description }}</dd>
+
+    <dt class="col-sm-3">Quantity On Hand</dt>
+    <dd class="col-sm-9">{{ part.quantityOnHand }}</dd>
+
+    <dt class="col-sm-3">Location Code</dt>
+    <dd class="col-sm-9">{{ part.locationCode }}</dd>
+
+    <dt class="col-sm-3">Last Stock Take</dt>
+    <dd class="col-sm-9">{{ part.lastStockTake | date: 'shortDate' }}</dd>
+  </dl>
+
+  <button class="btn btn-secondary" (click)="goBack()">Back</button>
+</div>
+
+<ng-template #loadingOrError>
+  <div *ngIf="loading" class="alert alert-info">Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+</ng-template>

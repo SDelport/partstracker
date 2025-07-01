@@ -1,0 +1,93 @@
+<div class="container mt-4">
+  <h2>{{ isEditMode ? 'Edit Part' : 'Create Part' }}</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="mb-3">
+      <label for="partNumber" class="form-label">Part Number</label>
+      <input
+        type="text"
+        id="partNumber"
+        formControlName="partNumber"
+        class="form-control"
+        [readonly]="isEditMode"
+      />
+      <div *ngIf="form.controls['partNumber'].invalid && form.controls['partNumber'].touched" class="text-danger">
+        Part Number is required.
+      </div>
+      <div *ngIf="errors['PartNumber']" class="text-danger">
+        {{ errors['PartNumber'][0] }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <input
+        type="text"
+        id="description"
+        formControlName="description"
+        class="form-control"
+      />
+      <div *ngIf="form.controls['description'].invalid && form.controls['description'].touched" class="text-danger">
+        Description is required.
+      </div>
+      <div *ngIf="errors['Description']" class="text-danger">
+        {{ errors['Description'][0] }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="quantityOnHand" class="form-label">Quantity On Hand</label>
+      <input
+        type="number"
+        id="quantityOnHand"
+        formControlName="quantityOnHand"
+        class="form-control"
+        min="0"
+      />
+      <div *ngIf="form.controls['quantityOnHand'].invalid && form.controls['quantityOnHand'].touched" class="text-danger">
+        Quantity must be 0 or more.
+      </div>
+      <div *ngIf="errors['QuantityOnHand']" class="text-danger">
+        {{ errors['QuantityOnHand'][0] }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="locationCode" class="form-label">Location Code</label>
+      <input
+        type="text"
+        id="locationCode"
+        formControlName="locationCode"
+        class="form-control"
+      />
+      <div *ngIf="form.controls['locationCode'].invalid && form.controls['locationCode'].touched" class="text-danger">
+        Location Code is required.
+      </div>
+      <div *ngIf="errors['LocationCode']" class="text-danger">
+        {{ errors['LocationCode'][0] }}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastStockTake" class="form-label">Last Stock Take</label>
+      <input
+        type="date"
+        id="lastStockTake"
+        formControlName="lastStockTake"
+        class="form-control"
+      />
+      <div *ngIf="form.controls['lastStockTake'].invalid && form.controls['lastStockTake'].touched" class="text-danger">
+        Last Stock Take date is required.
+      </div>
+      <div *ngIf="errors['LastStockTake']" class="text-danger">
+        {{ errors['LastStockTake'][0] }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+      {{ isEditMode ? 'Update' : 'Create' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="onCancel()">
+      Cancel
+    </button>
+  </form>
+</div>

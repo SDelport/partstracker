@@ -1,0 +1,36 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Parts List</h2>
+  <button class="btn btn-success mb-3" (click)="create()">+ Create New Part</button>
+
+  <div *ngIf="loading" class="alert alert-info">Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+
+  <table *ngIf="!loading && parts.length > 0" class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Part #</th>
+        <th>Description</th>
+        <th>Qty</th>
+        <th>Location</th>
+        <th>Last Stock Take</th>
+        <th style="width: 180px;">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let part of parts">
+        <td>{{ part.partNumber }}</td>
+        <td>{{ part.description }}</td>
+        <td>{{ part.quantityOnHand }}</td>
+        <td>{{ part.locationCode }}</td>
+        <td>{{ part.lastStockTake | date: 'short' }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm me-1" (click)="view(part.partNumber)">View</button>
+          <button class="btn btn-warning btn-sm me-1" (click)="edit(part.partNumber)">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="delete(part.partNumber)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && parts.length === 0" class="text-muted">No parts available.</p>
+</div>
